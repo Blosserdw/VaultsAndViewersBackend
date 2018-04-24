@@ -13,12 +13,12 @@ app.use(bodyParser.json()) // for parsing application/json
 // openssl genrsa -out server.key 1024
 // openssl req -new -key server.key -out server.csr
 // openssl x509 -req -days 10950 -in server.csr -signkey server.key -out server.crt
-var options = {
+/* var options = {
 	key: fs.readFileSync('encryption/server.key'),
 	cert: fs.readFileSync( 'encryption/server.crt' ),
 	requestCert: false,
     rejectUnauthorized: false,
-};
+}; */
 
 // Create server using the encryption options created above
 var https = require('http').Server(app)

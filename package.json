@@ -2,7 +2,7 @@
   "name": "test-project",
   "version": "1.0.0",
   "description": "Socket.io test",
-  "main": "server.js",
+  "main": "serverTest.js",
   "author": "David Blosser",
   "license": "ISC",
   "dependencies": {
