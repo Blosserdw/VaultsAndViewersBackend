@@ -1,7 +1,10 @@
 //================================================================================================================================|
 // PACKAGE SETUP, REQUIRES, ETC
 //================================================================================================================================|
-var app = require('express')(); // used for simplified http methods for getting/posting/etc
+var express = require('express');
+var app = express(); // used for simplified http methods for getting/posting/etc
+var server = require('http').createServer(app);
+var io = require('socket.io').listen(server);
 var fs = require('fs'); // file system
 
 // body parser gives us access to req.body stuff
@@ -21,14 +24,14 @@ app.use(bodyParser.json()); // for parsing application/json
 }; */
 
 // Create server using the encryption options created above
-var server = require('http').createServer(app);
+//var server = require('http').createServer(app);
 
 // Saving this for later in case I need to serve files to the user, like when changing icons and such?
 //var path = "C:/NodeJS/test-project/"; // express sendFile needs to be provided an absolute path, unless using root in options
 // res.sendFile(path + 'index.html');
 
 // socket.io
-var io = require('socket.io').listen(server);
+//var io = require('socket.io').listen(server);
 io.attach(4567);
 
 // json web tokens, need to use Buffer.from(<secretGoesHere>, 'base64') to verify the secret that twitch generates
@@ -253,7 +256,7 @@ app.get('*', function(req, res){
 //================================================================================================================================|
 var port = process.env.PORT || 3000;
 var host = "127.0.0.1";
-server.listen(port, function() {
+server.listen(process.env.PORT || 3000, function() {
    console.log('listening on *:' + port);
 });
 
