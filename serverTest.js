@@ -6,8 +6,8 @@ var fs = require('fs'); // file system
 
 // body parser gives us access to req.body stuff
 var bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({ extended: true })) // To parse URL encoded data
-app.use(bodyParser.json()) // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // To parse URL encoded data
+app.use(bodyParser.json()); // for parsing application/json
 
 // Certificate info for creating self-signed certificate
 // openssl genrsa -out server.key 1024
@@ -21,7 +21,7 @@ app.use(bodyParser.json()) // for parsing application/json
 }; */
 
 // Create server using the encryption options created above
-var server = require('http').Server(app)
+var server = require('http').createServer(app);
 
 // Saving this for later in case I need to serve files to the user, like when changing icons and such?
 //var path = "C:/NodeJS/test-project/"; // express sendFile needs to be provided an absolute path, unless using root in options
