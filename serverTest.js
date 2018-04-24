@@ -20,7 +20,26 @@ const PORT = process.env.PORT || 3000;
 const INDEX = path.join(__dirname, 'index.html');
 
 const server = express()
-  .use((req, res) => res.sendFile(INDEX) )
+  .use(function(req, res, next)
+	  {
+		res.sendFile(INDEX);
+		
+		 // Website you wish to allow to connect
+		res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8012');
+
+		// Request methods you wish to allow
+		res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+		// Request headers you wish to allow
+		res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+		// Set to true if you need the website to include cookies in the requests sent
+		// to the API (e.g. in case you use sessions)
+		res.setHeader('Access-Control-Allow-Credentials', true);
+
+		// Pass to next layer of middleware
+		next();
+	  })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 const io = socketIO(server);
@@ -198,7 +217,7 @@ function SetupBrowserConnectionEvents(socket, decodedJWT)
 // MIDDLEWARE FUNCTIONS
 //================================================================================================================================|
 // CORS stuff, not sure if it was working correctly or not though, might be? cause I'm able to make post requests now... hmm...
-/* app.use(function (req, res, next) {
+/* server.use(function (req, res, next) {
 	
     // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8012');
