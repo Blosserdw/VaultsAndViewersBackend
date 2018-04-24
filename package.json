@@ -1,0 +1,16 @@
+{
+  "name": "test-project",
+  "version": "1.0.0",
+  "description": "Socket.io test",
+  "main": "server.js",
+  "author": "David Blosser",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "jsonwebtoken": "^8.1.0",
+    "multer": "^1.3.0",
+    "nodemon": "^1.12.5",
+    "socket.io": "^2.0.4"
+  }
+}
