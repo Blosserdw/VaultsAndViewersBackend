@@ -25,7 +25,7 @@ const server = express()
 
 const io = socketIO(server);
 
-io.origins('*:*');
+io.set('origins', "http://localhost:8012");
 
 
 
