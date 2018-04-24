@@ -253,7 +253,7 @@ app.get('*', function(req, res){
 //================================================================================================================================|
 var port = process.env.PORT || 3000;
 var host = "127.0.0.1";
-https.listen(port, host, function() {
+https.listen(port, function() {
    console.log('listening on *:' + port);
 });
 
