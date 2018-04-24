@@ -21,14 +21,14 @@ app.use(bodyParser.json()) // for parsing application/json
 }; */
 
 // Create server using the encryption options created above
-var https = require('http').Server(app)
+var server = require('http').Server(app)
 
 // Saving this for later in case I need to serve files to the user, like when changing icons and such?
 //var path = "C:/NodeJS/test-project/"; // express sendFile needs to be provided an absolute path, unless using root in options
 // res.sendFile(path + 'index.html');
 
 // socket.io
-var io = require('socket.io')(https);
+var io = require('socket.io').listen(server);
 io.attach(4567);
 
 // json web tokens, need to use Buffer.from(<secretGoesHere>, 'base64') to verify the secret that twitch generates
@@ -172,7 +172,7 @@ function SetupBrowserConnectionEvents(socket, decodedJWT)
 app.use(function (req, res, next) {
 	
     // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'https://localhost:8013');
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8012');
 
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -253,7 +253,7 @@ app.get('*', function(req, res){
 //================================================================================================================================|
 var port = process.env.PORT || 3000;
 var host = "127.0.0.1";
-https.listen(port, function() {
+server.listen(port, function() {
    console.log('listening on *:' + port);
 });
 
