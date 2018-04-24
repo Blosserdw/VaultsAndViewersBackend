@@ -1,16 +1,42 @@
 //================================================================================================================================|
 // PACKAGE SETUP, REQUIRES, ETC
 //================================================================================================================================|
-var express = require('express');
-var app = express(); // used for simplified http methods for getting/posting/etc
-var server = require('http').createServer(app);
-var io = require('socket.io').listen(server);
+//var express = require('express')
+//var app = express(); // used for simplified http methods for getting/posting/etc
+//app.use((req, res) => res.sendFile(INDEX));
+//app.listen(process.env.PORT, () => console.log('Listening on ${ process.env.PORT }'));
+//var server = require('http').createServer(app);
+//var socketIO = require('socket.io');
+
+
+
+
+
+const express = require('express');
+const socketIO = require('socket.io');
+const path = require('path');
+
+const PORT = process.env.PORT || 3000;
+const INDEX = path.join(__dirname, 'index.html');
+
+const server = express()
+  .use((req, res) => res.sendFile(INDEX) )
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
+
+const io = socketIO(server);
+
+
+
+
+
+
+
 var fs = require('fs'); // file system
 
 // body parser gives us access to req.body stuff
-var bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({ extended: true })); // To parse URL encoded data
-app.use(bodyParser.json()); // for parsing application/json
+//var bodyParser = require('body-parser');
+//app.use(bodyParser.urlencoded({ extended: true })); // To parse URL encoded data
+//app.use(bodyParser.json()); // for parsing application/json
 
 // Certificate info for creating self-signed certificate
 // openssl genrsa -out server.key 1024
@@ -172,7 +198,7 @@ function SetupBrowserConnectionEvents(socket, decodedJWT)
 // MIDDLEWARE FUNCTIONS
 //================================================================================================================================|
 // CORS stuff, not sure if it was working correctly or not though, might be? cause I'm able to make post requests now... hmm...
-app.use(function (req, res, next) {
+/* app.use(function (req, res, next) {
 	
     // Website you wish to allow to connect
     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8012');
@@ -189,7 +215,7 @@ app.use(function (req, res, next) {
 
     // Pass to next layer of middleware
     next();
-});
+}); */
 
 //================================================================================================================================|
 // HTTP METHODSs
@@ -247,18 +273,18 @@ app.post('/count', function(req, res) {
 }); */
 
 // This should be the last http get route because they are executed in order, so if none match it can show a bad URL message
-app.get('*', function(req, res){
+/* app.get('*', function(req, res){
    res.send('Sorry, this is an invalid URL.');
-});
+}); */
 
 //================================================================================================================================|
 // SERVER
 //================================================================================================================================|
-var port = process.env.PORT || 3000;
+/* var port = process.env.PORT || 3000;
 var host = "127.0.0.1";
 server.listen(process.env.PORT || 3000, function() {
    console.log('listening on *:' + port);
-});
+}); */
 
 
 
