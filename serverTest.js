@@ -25,7 +25,7 @@ const server = express()
 		res.sendFile(INDEX);
 		
 		 // Website you wish to allow to connect
-		res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8012');
+		res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8012/index.html');
 
 		// Request methods you wish to allow
 		res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
